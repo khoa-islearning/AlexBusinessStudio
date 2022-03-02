@@ -26,6 +26,13 @@ div.sales-sum {
     padding: 10px;
 }
 
+div.sales-chart {
+    border: solid 1px;
+    border-radius: 10px;
+    background-color:ghostwhite;
+    padding: 10px;
+}
+
 .content {
     padding-top: 1.1rem;
 }

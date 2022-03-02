@@ -1,6 +1,9 @@
 ﻿@page "/"
 @layout AdminLayout
+@using System.Globalization
 <PageTitle>Index</PageTitle>
+
+<!--TOOLTIP-->
 
 
 <div class="container-fluid">
@@ -17,7 +20,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div class = "sales-sum">
+            <div class="sales-sum">
                 <h3>Revenue</h3>
                 <h4>$512</h4>
             </div>
@@ -29,12 +32,259 @@
             </div>
         </div>
         <div class="col-md-2 d-flex align-items-baseline" style="padding-top : 25px;">
-            <button class = "btn btn-success"> View all listings </button>
+            <button class="btn btn-success"> View all listings </button>
         </div>
 
     </div>
-    <div class="row">
-        
+
+    <!--CHART-->
+
+
+    <div class="row p-5">
+        <div class="col-md-5 sales-chart">
+            <RadzenChart>
+                <RadzenPieSeries Data="@revenue" Title="Revenue" CategoryProperty="Quarter" ValueProperty="Revenue" />
+            </RadzenChart>
+        </div>
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-6 sales-chart">
+            <RadzenChart>
+                <RadzenLineSeries Smooth="@smooth" Data="@revenue2019" CategoryProperty="Date" Title="2019" LineType="LineType.Dashed" ValueProperty="Revenue">
+                    <RadzenMarkers MarkerType="MarkerType.Square" />
+                </RadzenLineSeries>
+                <RadzenLineSeries Smooth="@smooth" Data="@revenue2020" CategoryProperty="Date" Title="2020" ValueProperty="Revenue">
+                    <RadzenMarkers MarkerType="MarkerType.Circle" />
+                </RadzenLineSeries>
+                <RadzenCategoryAxis Padding="20" FormatString="{0:MMM}" />
+                <RadzenValueAxis Formatter="@FormatAsUSD">
+                    <RadzenGridLines Visible="true" />
+                    <RadzenAxisTitle Text="Revenue in USD" />
+                </RadzenValueAxis>
+            </RadzenChart>
+        </div>
     </div>
-    <div class="row"></div>
+
+    <!--PREVIEW TABLE-->
+    <div class="row">
+        <table class="table table-striped">
+            <tr>
+                <th>Company</th>
+                <th>Contact</th>
+                <th>Country</th>
+            </tr>
+            <tr>
+                <td>Alfreds Futterkiste</td>
+                <td>Maria Anders</td>
+                <td>Germany</td>
+            </tr>
+            <tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr><tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr><tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr><tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr><tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr><tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr><tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr><tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr>
+        </table>
+    </div>
 </div>
+
+
+@code {
+
+    string FormatAsUSD(object value)
+    {
+        return ((double)value).ToString("C0", CultureInfo.CreateSpecificCulture("en-US"));
+    }
+
+    class DataItem
+    {
+        public string Quarter { get; set; }
+        public double Revenue { get; set; }
+    }
+
+    DataItem[] revenue = new DataItem[] {
+        new DataItem
+        {
+            Quarter = "Q1",
+            Revenue = 30000
+        },
+        new DataItem
+        {
+            Quarter = "Q2",
+            Revenue = 40000
+        },
+        new DataItem
+        {
+            Quarter = "Q3",
+            Revenue = 50000
+        },
+        new DataItem
+        {
+            Quarter = "Q4",
+            Revenue = 80000
+        },
+    };
+
+    bool smooth = false;
+
+    class DataItem1
+    {
+        public DateTime Date { get; set; }
+        public double Revenue { get; set; }
+    }
+
+    DataItem1[] revenue2019 = new DataItem1[] {
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-01-01"),
+            Revenue = 234000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-02-01"),
+            Revenue = 269000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-03-01"),
+            Revenue = 233000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-04-01"),
+            Revenue = 244000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-05-01"),
+            Revenue = 214000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-06-01"),
+            Revenue = 253000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-07-01"),
+            Revenue = 274000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-08-01"),
+            Revenue = 284000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-09-01"),
+            Revenue = 273000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-10-01"),
+            Revenue = 282000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-11-01"),
+            Revenue = 289000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-12-01"),
+            Revenue = 294000
+        }
+    };
+
+    DataItem1[] revenue2020 = new DataItem1[] {
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-01-01"),
+            Revenue = 334000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-02-01"),
+            Revenue = 369000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-03-01"),
+            Revenue = 333000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-04-01"),
+            Revenue = 344000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-05-01"),
+            Revenue = 314000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-06-01"),
+            Revenue = 353000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-07-01"),
+            Revenue = 374000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-08-01"),
+            Revenue = 384000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-09-01"),
+            Revenue = 373000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-10-01"),
+            Revenue = 382000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-11-01"),
+            Revenue = 389000
+        },
+        new DataItem1
+        {
+            Date = DateTime.Parse("2019-12-01"),
+            Revenue = 394000
+        }
+    };
+
+}
