@@ -18,6 +18,14 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
+
+div.sales-sum {
+    border: solid thin 1px;
+    border-radius: 10px;
+    background-color: gainsboro;
+    padding: 10px;
+}
+
 .content {
     padding-top: 1.1rem;
 }
