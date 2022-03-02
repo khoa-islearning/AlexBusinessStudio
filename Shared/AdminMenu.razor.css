@@ -35,22 +35,27 @@
     }
 
     .nav-item ::deep a {
-        color: black;
+        color: white;
         border-radius: 4px;
         height: 3rem;
         display: flex;
         align-items: center;
         line-height: 3rem;
+        text-decoration: none !important;
+        padding: 5px;
+        background-color: #482490;
     }
 
         .nav-item ::deep a.active {
             background-color: #221144 !important;
             color: white !important;
+            text-decoration: none !important
         }
 
         .nav-item ::deep a:hover {
             background-color: #311863;
             color: white;
+            text-decoration: none !important
         }
 
 @media (min-width: 641px) {
