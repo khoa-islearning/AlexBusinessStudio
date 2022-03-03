@@ -18,6 +18,10 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
+div.info-bar {
+    padding: 10px;
+    background-color: rgb(220,220,220);
+}
 
 div.sales-sum {
     border: solid thin 1px;

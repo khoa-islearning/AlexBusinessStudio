@@ -1,0 +1,40 @@
+﻿@page "/storage"
+@layout AdminLayout
+@using Radzen
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sales-sum">
+                <h3>Photos:</h3>
+                <h4>12000</h4>
+            </div>
+        </div>
+        <div class="col-md-7"></div>
+
+        <div class="col-md-1 d-flex align-items-baseline" style="padding-top : 25px;">
+            <!--TODO convert styles to css-->
+            <button class="btn btn-success" style="display:flex; justify-content:right; ">
+                <RadzenIcon style="justify-content:center; align-content:center" Icon="sync" IconStyle="IconStyle.Light" />&nbsp; Sync
+            </button>
+        </div>
+
+        <div class="col-md-2 d-flex align-items-baseline" style="padding-top : 25px;">
+            <button class="btn btn-success" style="display:flex">
+                <RadzenIcon style="justify-content:center; align-content:center" Icon="file_upload" IconStyle="IconStyle.Light" />&nbsp; Upload Images
+            </button>
+        </div>
+    </div>
+    <div class="row" style="height:100%;">
+        <div class="col-9 overflow-scroll">
+            <QueryCardView />
+        </div>
+        <div class="col-3 info-bar">
+            <SearchBar />
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    }
