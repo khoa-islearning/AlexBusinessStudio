@@ -26,8 +26,7 @@ label.fake-button {
     padding: 7px;
     border-radius: 0.3rem;
     cursor: pointer;
-    display:flex;
-
+    display: flex;
 }
 
 h1:focus {
@@ -54,8 +53,8 @@ div.info-bar {
     align-self: flex-start;
 }
 
-.info-bar-item{
-    padding-left : 10px;
+.info-bar-item {
+    padding-left: 10px;
 }
 
 
@@ -125,3 +124,29 @@ form.search-bar {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+.tableFixHead {
+    overflow-y: auto;
+    height: 30vh;
+}
+
+    .tableFixHead thead th {
+        position: sticky;
+        top: 0;
+    }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background: #eee;
+}
