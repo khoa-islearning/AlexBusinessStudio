@@ -1,0 +1,28 @@
+﻿@page "/history"
+@layout AdminLayout
+@using Radzen
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sales-sum">
+                <h3>Results:</h3>
+                <h4>12000</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="height:100%; padding-top: 10px">
+        <div class="col-9 overflow-scroll">
+            <HistoryQueryView />
+        </div>
+        <div class="col-3 info-bar" style="border-radius: 5px;">
+            <HistorySearchBar />
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    }

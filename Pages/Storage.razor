@@ -1,7 +1,7 @@
 ﻿@page "/storage"
 @layout AdminLayout
 @using Radzen
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-2">
             <div class="sales-sum">
@@ -9,26 +9,49 @@
                 <h4>12000</h4>
             </div>
         </div>
-        <div class="col-md-7"></div>
 
-        <div class="col-md-1 d-flex align-items-baseline" style="padding-top : 25px;">
+        <div class="col-md-2"></div>
+
+        <div class="col-md-6 d-flex align-items-baseline flex-row" style="justify-content:center; margin: auto;">
             <!--TODO convert styles to css-->
-            <button class="btn btn-success" style="display:flex; justify-content:right; ">
+            <button class="btn btn-success" style="display:flex; justify-content:right;; align-self: flex-end; margin : 3px ">
                 <RadzenIcon style="justify-content:center; align-content:center" Icon="sync" IconStyle="IconStyle.Light" />&nbsp; Sync
+            </button>
+            <button class="btn btn-success" style="display:flex; justify-content:right;; align-self: flex-end; margin : 3px">
+                <RadzenIcon style="justify-content:center; align-content:center" Icon="sync" IconStyle="IconStyle.Light" />&nbsp; Edit
+            </button>
+            <button class="btn btn-success" style="display:flex; justify-content:right;; align-self: flex-end;margin : 3px ">
+                <RadzenIcon style="justify-content:center; align-content:center" Icon="sync" IconStyle="IconStyle.Light" />&nbsp; List
             </button>
         </div>
 
         <div class="col-md-2 d-flex align-items-baseline" style="padding-top : 25px;">
-            <button class="btn btn-success" style="display:flex">
+            @*            <input type="file" class="custom-file-input" />
+                <button class="btn btn-success" style="display:flex">
                 <RadzenIcon style="justify-content:center; align-content:center" Icon="file_upload" IconStyle="IconStyle.Light" />&nbsp; Upload Images
-            </button>
+                </button>
+
+
+            *@
+
+            <!--default html file upload button-->
+            <input type="file" id="actual-btn" hidden />
+
+            <!--our custom file upload button-->
+            <label for="actual-btn" class="fake-button">
+                <RadzenIcon style="justify-content:center; align-content:center" Icon="file_upload" IconStyle="IconStyle.Light" />
+                &nbsp; Choose File
+            </label>
+
+
         </div>
     </div>
+
     <div class="row" style="height:100%;">
         <div class="col-9 overflow-scroll">
             <QueryCardView />
         </div>
-        <div class="col-3 info-bar">
+        <div class="col-3 info-bar" style="border-radius: 5px;">
             <SearchBar />
         </div>
     </div>

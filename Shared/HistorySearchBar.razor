@@ -1,7 +1,7 @@
 ﻿<form class="search-bar">
     <input type="text" placeholder="Search.." style="border-radius: 5px;">
 
-    <label class="info-bar-left"> <h4>Category</h4></label>
+    <label class="info-bar-left"> <h4>Tag</h4></label>
     <div class="info-bar-left info-bar-item">
         <label for="cat"> Cat </label> <input id="cat" type="radio" value="Cat" checked />
         <br />
@@ -12,7 +12,7 @@
     <!---->
 
 
-    <label class="info-bar-left"> <h4>Date</h4></label>
+    <label class="info-bar-left"> <h4>Purchased Date</h4></label>
     <div class="info-bar-left info-bar-item">
         <label for="start_date">Start date:</label>
         <input type="date" id="start_date" name="">
@@ -26,13 +26,13 @@
     <br />
 
 
-    <label class="info-bar-left"> <h4>List status</h4></label>
+    <label class="info-bar-left"> <h4>Paid Amount</h4></label>
     <div class="info-bar-left info-bar-item">
-        <label for="cat"> Listed </label> <input id="cat" type="radio" value="Cat" />
+        <label for="min">Min:</label>
+        <input type="number" id="min" name="min" min="1" max="5"> $
         <br />
-        <label for="cat"> Not listed </label> <input id="cat" type="radio" value="Dog" checked />
-        <br />
-        <label for="cat"> Sold</label> <input id="cat" type="radio" value="Dog" />
+        <label for="max">Max:</label>
+        <input type="number" id="max" name="max" min="1" max="5"> $
     </div>
 
     <br />
