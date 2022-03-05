@@ -40,17 +40,11 @@
     <!--CHART-->
 
 
-    <div class="row p-5">
-        <div class="col-md-5 sales-chart">
-            <RadzenChart>
-                <RadzenPieSeries Data="@revenue" Title="Revenue" CategoryProperty="Quarter" ValueProperty="Revenue" />
-            </RadzenChart>
-        </div>
+    <div class="row p-3">
 
-        <div class="col-md-1"></div>
 
         <div class="col-md-6 sales-chart">
-            <RadzenChart>
+            <RadzenChart Style="height:30vh">
                 <RadzenLineSeries Smooth="@smooth" Data="@revenue2019" CategoryProperty="Date" Title="2019" LineType="LineType.Dashed" ValueProperty="Revenue">
                     <RadzenMarkers MarkerType="MarkerType.Square" />
                 </RadzenLineSeries>
@@ -60,59 +54,42 @@
                 <RadzenCategoryAxis Padding="20" FormatString="{0:MMM}" />
                 <RadzenValueAxis Formatter="@FormatAsUSD">
                     <RadzenGridLines Visible="true" />
-                    <RadzenAxisTitle Text="Revenue in USD" />
+                    <RadzenAxisTitle Text="Monthly Sales" />
                 </RadzenValueAxis>
             </RadzenChart>
         </div>
+        <div class="col-md-1"></div>
+
+        <div class="col-md-5 sales-chart">
+            Most View Categories
+            <RadzenChart Style="height:30vh">
+                <RadzenPieSeries Data="@revenue" title="View" CategoryProperty="Category" ValueProperty="View" />
+                <RadzenLegend Position="LegendPosition.Bottom" />
+            </RadzenChart>
+        </div>
+
     </div>
 
+    <!-- EXPORT BUTTON -->
+    <div class="row d-flex p-3">
+        @*<div class="col-1" style="align-self: flex-end">
+            <button class="btn-close-white">Export</button>
+            </div>*@
+        <div style="margin:auto; width:auto">
+            Top: &nbsp;
+            <label for="keyword"> Keywords</label>
+            <input type="radio" id="keywords" name="top" value="keyword">&nbsp;
+            <label for="photos"> Photos</label>
+            <input type="radio" id="photos" name="top" value="photos"> &nbsp;
+            <label for="categories"> Categories</label>
+            <input type="radio" id="categories" name="top" value="categories">
+
+        </div>
+
+    </div>
     <!--PREVIEW TABLE-->
     <div class="row">
-        <table class="table table-striped">
-            <tr>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
-            </tr>
-            <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-            </tr>
-            <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-            </tr><tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-            </tr><tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-            </tr><tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-            </tr><tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-            </tr><tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-            </tr><tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-            </tr><tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-            </tr>
-        </table>
+        <TrendTable />
     </div>
 </div>
 
@@ -126,165 +103,151 @@
 
     class DataItem
     {
-        public string Quarter { get; set; }
-        public double Revenue { get; set; }
+        public string Category { get; set; }
+        public double View { get; set; }
     }
 
     DataItem[] revenue = new DataItem[] {
         new DataItem
         {
-            Quarter = "Q1",
-            Revenue = 30000
+            Category = "Cat",
+            View = 300
         },
         new DataItem
         {
-            Quarter = "Q2",
-            Revenue = 40000
+            Category = "Dog",
+            View= 200
         },
         new DataItem
         {
-            Quarter = "Q3",
-            Revenue = 50000
+            Category= "Street",
+            View= 100
         },
         new DataItem
         {
-            Quarter = "Q4",
-            Revenue = 80000
+            Category = "Others",
+            View= 250
         },
     };
 
     bool smooth = false;
 
-    class DataItem1
+    class DataItemRevenue
     {
         public DateTime Date { get; set; }
         public double Revenue { get; set; }
     }
 
-    DataItem1[] revenue2019 = new DataItem1[] {
-        new DataItem1
+    DataItemRevenue[] revenue2019 = new DataItemRevenue[] {
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-01-01"),
-            Revenue = 234000
+            Revenue = 2340
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-02-01"),
-            Revenue = 269000
+            Revenue = 2690
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-03-01"),
-            Revenue = 233000
+            Revenue = 2330
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-04-01"),
-            Revenue = 244000
+            Revenue = 2440
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-05-01"),
-            Revenue = 214000
+            Revenue = 2140
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-06-01"),
-            Revenue = 253000
+            Revenue = 2530
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-07-01"),
-            Revenue = 274000
+            Revenue = 2740
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-08-01"),
-            Revenue = 284000
+            Revenue = 2840
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-09-01"),
-            Revenue = 273000
+            Revenue = 2730
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-10-01"),
-            Revenue = 282000
+            Revenue = 2820
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-11-01"),
-            Revenue = 289000
+            Revenue = 2890
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-12-01"),
-            Revenue = 294000
+            Revenue = 2940
         }
     };
 
-    DataItem1[] revenue2020 = new DataItem1[] {
-        new DataItem1
+    DataItemRevenue[] revenue2020 = new DataItemRevenue[] {
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-01-01"),
-            Revenue = 334000
+            Revenue = 3340
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-02-01"),
-            Revenue = 369000
+            Revenue = 3690
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-03-01"),
-            Revenue = 333000
+            Revenue = 3330
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-04-01"),
-            Revenue = 344000
+            Revenue = 3440
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-05-01"),
-            Revenue = 314000
+            Revenue = 3140
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-06-01"),
-            Revenue = 353000
+            Revenue = 3530
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-07-01"),
-            Revenue = 374000
+            Revenue = 3740
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-08-01"),
-            Revenue = 384000
+            Revenue = 3840
         },
-        new DataItem1
+        new DataItemRevenue
         {
             Date = DateTime.Parse("2019-09-01"),
-            Revenue = 373000
+            Revenue = 3730
         },
-        new DataItem1
-        {
-            Date = DateTime.Parse("2019-10-01"),
-            Revenue = 382000
-        },
-        new DataItem1
-        {
-            Date = DateTime.Parse("2019-11-01"),
-            Revenue = 389000
-        },
-        new DataItem1
-        {
-            Date = DateTime.Parse("2019-12-01"),
-            Revenue = 394000
-        }
+
     };
 
 }
