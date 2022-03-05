@@ -4,6 +4,32 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+body {
+    background-color: white !important;
+}
+
+.card-view {
+    overflow: scroll;
+    height: 85vh;
+    padding-top: 15px;
+}
+
+.table-view {
+    overflow: scroll;
+    height: 85vh;
+    padding-top: 10px;
+}
+
+label.fake-button {
+    background-color: #157347;
+    color: white;
+    padding: 7px;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    display:flex;
+
+}
+
 h1:focus {
     outline: none;
 }
@@ -18,6 +44,20 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
+div.info-bar {
+    padding: 10px;
+    background-color: rgb(220,220,220);
+    height: 100%;
+}
+
+.info-bar-left {
+    align-self: flex-start;
+}
+
+.info-bar-item{
+    padding-left : 10px;
+}
+
 
 div.sales-sum {
     border: solid thin 1px;
@@ -29,7 +69,7 @@ div.sales-sum {
 div.sales-chart {
     border: solid 1px;
     border-radius: 10px;
-    background-color:ghostwhite;
+    background-color: ghostwhite;
     padding: 10px;
 }
 
@@ -47,6 +87,14 @@ div.sales-chart {
 
 .validation-message {
     color: red;
+}
+
+form.search-bar {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 !important;
 }
 
 #blazor-error-ui {

@@ -1,0 +1,46 @@
+﻿@page "/listings"
+@layout AdminLayout
+@using Radzen
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sales-sum">
+                <h3>All listings:</h3>
+                <h4>12000</h4>
+            </div>
+        </div>
+
+        <div class="col-md-6"></div>
+
+        <div class="col-md-2 d-flex align-items-baseline flex-column" style="padding-top : 25px;">
+            <!--TODO convert styles to css-->
+            <button class="btn btn-success" style="display:flex; justify-content:right;; align-self: flex-end ">
+                <RadzenIcon style="justify-content:center; align-content:center" Icon="sync" IconStyle="IconStyle.Light" />&nbsp; Edit
+            </button>
+        </div>
+
+        <div class="col-md-2 d-flex align-items-baseline flex-column" style="padding-top : 25px;">
+            <!--TODO convert styles to css-->
+            <button class="btn btn-success" style="display:flex; justify-content:right;; align-self: flex-start">
+                <RadzenIcon style="justify-content:center; align-content:center" Icon="sync" IconStyle="IconStyle.Light" />&nbsp; Refresh
+            </button>
+        </div>
+        
+
+   
+    </div>
+
+    <div class="row" style="height:100%;">
+        <div class="col-9 overflow-scroll">
+            <QueryCardView />
+        </div>
+        <div class="col-3 info-bar" style="border-radius: 5px;">
+            <ListingSearchBar />
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    }

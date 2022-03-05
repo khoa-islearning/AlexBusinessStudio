@@ -1,0 +1,51 @@
+﻿<form class="search-bar">
+    <input type="text" placeholder="Search.." style="border-radius: 5px;">
+
+    <label class="info-bar-left"> <h4>Tag</h4></label>
+    <div class="info-bar-left info-bar-item">
+        <label for="cat"> Cat </label> <input id="cat" type="radio" value="Cat" checked />
+        <br />
+        <label for="cat"> Cute </label> <input id="cat" type="radio" value="Dog" checked />
+    </div>
+
+    <br />
+    <!---->
+
+
+    <label class="info-bar-left"> <h4>Posted Date</h4></label>
+    <div class="info-bar-left info-bar-item">
+        <label for="start_date">Start date:</label>
+        <input type="date" id="start_date" name="">
+    </div>
+
+    <div class="info-bar-left info-bar-item">
+        <label for="end_date">End date:</label>
+        <input type="date" id="end_date" name="">
+    </div>
+
+    <br />
+
+
+    <label class="info-bar-left"> <h4>Price Range</h4></label>
+    <div class="info-bar-left info-bar-item">
+        <label for="min">Min:</label>
+        <input type="number" id="min" name="min" min="1" max="5"> $
+        <br />
+        <label for="max">Max:</label>
+        <input type="number" id="max" name="max" min="1" max="5"> $
+    </div>
+
+    <br />
+
+    <div class="info-bar-left">
+        <label for="cars">Sort by:</label>
+        <select name="cars" id="cars">
+            <option value="volvo">Size</option>
+            <option value="saab">Name</option>
+            <option value="opel">Date</option>
+        </select>
+    </div>
+    <br />
+
+    <input type="submit" value="Search" style="width: 100px;">
+</form>
