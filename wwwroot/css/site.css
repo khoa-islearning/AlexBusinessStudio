@@ -8,6 +8,14 @@ body {
     background-color: white !important;
 }
 
+div.popup {
+    background-color: #d7d7d7;
+    position: absolute;
+    z-index: 1000;
+    padding: 0;
+    margin: 0;
+}
+
 .card-view {
     overflow: scroll;
     height: 85vh;
