@@ -1,0 +1,32 @@
+@page "/list"
+@layout AdminLayout
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10"></div>
+
+
+
+        <div class="col-md-2 d-flex align-items-baseline flex-column" style="padding-top : 25px;">
+            <!--TODO convert styles to css-->
+            <button class="btn btn-danger" style="display:flex; justify-content:right;; align-self: flex-start">
+                <RadzenIcon style="justify-content:center; align-content:center" Icon="cancel_presentation" IconStyle="IconStyle.Light" />&nbsp; Take down
+            </button>
+        </div>
+        
+
+   
+    </div>
+
+    <div class="row p-1">
+        <div class="col-9">
+            <SingleListView/>
+        </div>
+
+        <div class="col-3 info-bar" style="border-radius:5px">
+            <SingleListInfo/>
+
+        </div>
+    </div>
+</div>

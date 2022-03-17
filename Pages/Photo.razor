@@ -1,0 +1,38 @@
+@page "/photo"
+@layout AdminLayout
+
+<ModifyImagePop/>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-7"></div>
+
+        <div class="col-md-3 d-flex align-items-baseline flex-column" style="padding-top : 25px;">
+            <!--TODO convert styles to css-->
+            <button class="btn btn-success" style="display:flex; justify-content:right;; align-self: flex-end ">
+                <RadzenIcon style="justify-content:center; align-content:center" Icon="double_arrow" IconStyle="IconStyle.Light" />&nbsp; List for sale
+            </button>
+        </div>
+
+        <div class="col-md-2 d-flex align-items-baseline flex-column" style="padding-top : 25px;">
+            <!--TODO convert styles to css-->
+            <button class="btn btn-danger" style="display:flex; justify-content:right;; align-self: flex-start">
+                <RadzenIcon style="justify-content:center; align-content:center" Icon="sync" IconStyle="IconStyle.Light" />&nbsp; Delete
+            </button>
+        </div>
+        
+
+   
+    </div>
+
+    <div class="row p-3">
+        <div class="col-9">
+            <SinglePhotoView/>
+        </div>
+
+        <div class="col-3 info-bar" style="border-radius:5px">
+            <SinglePhotoInfo/>
+
+        </div>
+    </div>
+</div>
