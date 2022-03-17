@@ -150,3 +150,7 @@ td {
 th {
     background: #eee;
 }
+
+body::-webkit-scrollbar{
+    display:none
+}
