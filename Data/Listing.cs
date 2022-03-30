@@ -2,11 +2,6 @@
 
 namespace AlexBusinessStudio.Data
 {
-    public enum ListingStatus
-    {
-        Sold,
-        NotSold
-    }
     public class Listing
     {
         [Required, Key]
@@ -20,8 +15,6 @@ namespace AlexBusinessStudio.Data
         [Required]
         [StringLength(300)]
         public string Description { get; set; }
-        [Required]
-        public ListingStatus status { get; set; }
 
     }
 }
