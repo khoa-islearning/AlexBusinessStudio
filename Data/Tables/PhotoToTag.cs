@@ -2,7 +2,7 @@
 
 namespace AlexBusinessStudio.Data
 {
-    public class PhotoToTags
+    public class PhotoToTag
     {
         [Required]
         public int PhotoId { get; set; }

@@ -2,16 +2,19 @@
 
 namespace AlexBusinessStudio.Data
 {
+    public enum BankAccountType
+    {
+        Chequing,
+        Saving
+    }
+
     public class BankInfo
     {
-        public enum BankAccountType
-        {
-            Chequing,
-            Saving
-        }
 
         [Required]
-        public int Id { get; set; }
+        public int Id { get; set; } 
+        [Required]
+        public int AccountNumber { get; set; }
         [Required]
         public int BankId { get; set; }
         [Required]
