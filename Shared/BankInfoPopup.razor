@@ -1,25 +1,29 @@
 ﻿<div class="container popup" style="height:40vh; width:60vw;top:30vh; right:20vw;">
-    <form class="p-2 d-flex flex-column" style="align-items:center">
+    <form class="p-2 d-flex flex-column" style="align-items:center" onsubmit="return false">
 
         <h2>Banking Information Setting</h2>
 
         <p style="align-self:flex-start">
-            <span style="font-size:1.2rem;">Bank Id:</span>&nbsp; &nbsp; &nbsp; ##
+            <span style="font-size:1.2rem">Bank Id:</span>&nbsp; &nbsp; &nbsp; <input type="text" value="04" size ="1"/>
             <i class="fa fa-edit" style="justify-self:center"></i>
         </p>
         
         <p style="align-self:flex-start">
-            <span style="font-size:1.2rem;">Bank Branch:</span>&nbsp; &nbsp; &nbsp; #####;
+            <span style="font-size:1.2rem;">Bank Branch:</span>&nbsp; &nbsp; &nbsp;  <input type="text" value="92689" size ="2"/>
             <i class="fa fa-edit" style="justify-self:center"></i>
         </p>
 
          <p style="align-self:flex-start">
-            <span style="font-size:1.2rem;">Account number:</span>&nbsp; &nbsp; &nbsp; ########;
+            <span style="font-size:1.2rem;">Account number:</span>&nbsp; &nbsp; &nbsp;<input type="text" value="689273947" size ="2"/>
             <i class="fa fa-edit" style="justify-self:center"></i>
         </p>         
         
         <p style="align-self:flex-start">
-            <span style="font-size:1.2rem;">Account type:</span>&nbsp; &nbsp; &nbsp; ######W;
+            <span style="font-size:1.2rem;">Account type:</span>&nbsp; &nbsp; &nbsp;
+            <select name="account_type" id="acc_tyoe">
+            <option value="Cheq">Chequing</option>
+            <option value="Sav">Saving</option>
+          </select>
             <i class="fa fa-edit" style="justify-self:center"></i>
         </p>
             
@@ -27,8 +31,12 @@
 
         <br />
         <div style="justify-self:flex-end">
-            <input type="submit" value="Save and Close" style="width: auto;">
-            <input type="submit" value="Cancel" style="width: auto;">
+            <button class="btn btn-success "  style="width: auto; " @onclick=@OnClick>Save and Close</button>
+            <button class="btn btn-danger"  style="width: auto;" @onclick=@OnClick>Cancel</button>
         </div>
     </form>
 </div>
+
+@code{
+    [Parameter] public EventCallback OnClick { get; set; }
+}
