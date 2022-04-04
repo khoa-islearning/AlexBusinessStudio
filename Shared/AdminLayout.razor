@@ -13,7 +13,7 @@
                 Hi Alex
             </span>
             &nbsp;&nbsp;&nbsp;
-            <button class="btn" style="padding-top: 10px; color:white; display:flex; flex-direction : row; margin: 0; justify-content: center; border: solid 1px; border-color:bisque" @onclick=@ToggleShowBankInfo>
+            <button class="btn" style="padding-top: 10px; color:white; display:flex; flex-direction : row; margin: 0; justify-content: center; border: solid 1px; border-color:bisque" @onclick="@(()=> ToggleShowBankInfo("toggle"))">
                 <RadzenIcon Icon="settings" IconStyle="IconStyle.Light"/> &nbsp; Setting
             </button>
         </div>
@@ -24,18 +24,24 @@
     </main>
 </div>
 
+
+
 @if(@IsShowingBankInfo)
 {
     <BankInfoPopup OnClick=ToggleShowBankInfo/>
 }
+@inject IJSRuntime JsRuntime
 
 @code
 {
+
     bool IsShowingBankInfo = false;
 
-    void ToggleShowBankInfo()
+
+    void ToggleShowBankInfo(string message)
     {
         IsShowingBankInfo = ! IsShowingBankInfo;
+        if (message == "save") { JsRuntime.InvokeAsync<string>("alert", "Bank information saved"); }
     }
 }
 

@@ -19,33 +19,32 @@
          <RadzenDatePicker @bind-Value=@end DateFormat="d"   />
     </div>
 
+    <br />
+
 
     <label class="info-bar-left"> <h4>List status</h4></label>
     <div class="info-bar-left info-bar-item">
-        <RadzenCheckBox @bind-Value=@nsold  Name="NotSold" TValue="bool" />
-                <RadzenLabel Text="Not Sold" Component="NotSold" Style="margin-left: 8px; vertical-align: middle;" />
+        <RadzenCheckBox @bind-Value=@nlisted  Name="NotListed" TValue="bool" />
+                <RadzenLabel Text="Not Listed" Component="NotListed" Style="margin-left: 8px; vertical-align: middle;" />
+        <br />
+       <RadzenCheckBox @bind-Value=@listed  Name="Listed" TValue="bool" />
+                <RadzenLabel Text="Listed" Component="Listed" Style="margin-left: 8px; vertical-align: middle;" />
         <br />
         <RadzenCheckBox @bind-Value=@sold  Name="Sold" TValue="bool" />
                 <RadzenLabel Text="Sold" Component="Sold" Style="margin-left: 8px; vertical-align: middle;" />
     </div>
 
+    <br />
 
     <div class="info-bar-left">
         <label class="info-bar-left"> <h4>Sort by:</h4></label>
         <RadzenDropDown TValue="int" @bind-value=sort Data=@data TextProperty="Name" ValueProperty="Id" />
     </div>
-    <label class="info-bar-left"> <h4>Price Range:</h4></label>
-    <div class="info-bar-left">
-        <label class="info-bar-left"> Min:</label>
-        <RadzenNumeric TValue="int" Min="0" Max="100" @bind-Value=@min/>
-        <label class="info-bar-left"> Max:</label>
-        <RadzenNumeric TValue="int" Min="0" Max="100" @bind-Value=@max/>
-    </div>
     <br />
 </form>
 <div class="row  d-flex flex-column" style="align-items:center; align-self:flex-end; margin: auto">
     <div style="justify-self:flex-end ; margin: auto; display:flex; flex-direction: column; align-items : center">
-        <button  style="width: 100pxmax-content;" class="btn btn-success" @onclick="@(() => OnSearch.InvokeAsync(new ListingSearchArg(sort, new bool[] {nsold, sold}, start, end,searchString, (multipleValues == null) ? (new String[] {}) : multipleValues.ToArray(), min, max)))">
+        <button  style="width: 100pxmax-content;" class="btn btn-success" @onclick="@(() => OnSearch.InvokeAsync(new SearchArg(sort, new bool[] {nlisted, listed, sold}, start, end,searchString, (multipleValues == null) ? (new String[] {}) : multipleValues.ToArray())))">
             Search
         </button>
     </div>
@@ -55,16 +54,15 @@
 @using  AlexBusinessStudio.Data
 @code{
 
-    [Parameter] public EventCallback<ListingSearchArg> OnSearch { get; set; }
+    [Parameter] public EventCallback<SearchArg> OnSearch { get; set; }
     public string searchString = "";
     public bool sold = true;
-    public bool nsold = true;
+    public bool listed = true;
+    public bool nlisted = true;
 
     int sort = 0;
     public DateTime start = new DateTime(2000,01,01);
     public DateTime end = DateTime.Now;
-    public int min = 0;
-    public int max = 0;
 
 
     IEnumerable<string> multipleValues = new string[] {};

@@ -1,0 +1,51 @@
+﻿<div class="tableFixHead">
+    <table>
+        <thead>
+            <tr>
+                <th>Keyword</th>
+                <th>Count</th>
+                <th>Changes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var k in keywords)
+            {
+                <tr>
+                    <td>@k.Name</td>
+                    <td>@k.Value</td>
+                    @if(@k.Change > 0)
+                    {
+                        <td style = "color:green"> &uarr; @k.Change</td>   
+                    }else{
+                        <td style = "color:red"> &darr; @k.Change</td>   
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code{
+
+    class Model
+    {
+        public string Name;
+        public int Value;
+        public int Change;
+    }
+
+    Model[] keywords = new Model[]
+    {
+        new Model {Name = "Cat", Value = 1512, Change = 17},
+        new Model {Name = "Cute", Value = 1425, Change = -5},
+        new Model {Name = "Feline", Value = 1040, Change = 8},
+        new Model {Name = "Dog", Value = 1000, Change = 80},
+        new Model {Name = "Street", Value = 1000, Change = -50},
+        new Model {Name = "Bird", Value = 932, Change = 26},
+        new Model {Name = "Party", Value = 815, Change = -11},
+        new Model {Name = "City", Value = 750, Change = -20},
+        new Model {Name = "Weeding", Value = 700, Change = 45},
+    };
+
+
+}

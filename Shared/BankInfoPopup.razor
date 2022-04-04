@@ -31,12 +31,12 @@
 
         <br />
         <div style="justify-self:flex-end">
-            <button class="btn btn-success "  style="width: auto; " @onclick=@OnClick>Save and Close</button>
-            <button class="btn btn-danger"  style="width: auto;" @onclick=@OnClick>Cancel</button>
+            <button class="btn btn-success "  style="width: auto;" @onclick="@(() => (OnClick.InvokeAsync("save")))">Save and Close</button>
+            <button class="btn btn-danger"  style="width: auto;" @onclick="@(() => (OnClick.InvokeAsync("cancel")))">Cancel</button>
         </div>
     </form>
 </div>
 
 @code{
-    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public EventCallback<string> OnClick { get; set; }
 }
