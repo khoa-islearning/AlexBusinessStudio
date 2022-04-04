@@ -3,7 +3,7 @@
 @using System.Globalization
 <PageTitle>Index</PageTitle>
 
-<BankInfoPopup/>
+
 
 
 <div class="container-fluid">
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="col-md-2 d-flex align-items-baseline" style="padding-top : 25px;">
-            <button class="btn btn-success"> View all listings </button>
+            <a class="btn btn-success" style="text-decoration:none !important" href="/listings"> View all listings </a>
         </div>
 
     </div>
@@ -45,10 +45,10 @@
 
         <div class="col-md-6 sales-chart">
             <RadzenChart Style="height:30vh">
-                <RadzenLineSeries Smooth="@smooth" Data="@revenue2019" CategoryProperty="Date" Title="2019" LineType="LineType.Dashed" ValueProperty="Revenue">
+                <RadzenLineSeries Smooth="@smooth" Data="@revenue2019" CategoryProperty="Date" Title="2021" LineType="LineType.Dashed" ValueProperty="Revenue">
                     <RadzenMarkers MarkerType="MarkerType.Square" />
                 </RadzenLineSeries>
-                <RadzenLineSeries Smooth="@smooth" Data="@revenue2020" CategoryProperty="Date" Title="2020" ValueProperty="Revenue">
+                <RadzenLineSeries Smooth="@smooth" Data="@revenue2020" CategoryProperty="Date" Title="2022" ValueProperty="Revenue">
                     <RadzenMarkers MarkerType="MarkerType.Circle" />
                 </RadzenLineSeries>
                 <RadzenCategoryAxis Padding="20" FormatString="{0:MMM}" />
@@ -76,25 +76,73 @@
             <button class="btn-close-white">Export</button>
             </div>*@
         <div style="margin:auto; width:auto">
-            Top: &nbsp;
-            <label for="keyword"> Keywords</label>
-            <input type="radio" id="keywords" name="top" value="keyword">&nbsp;
-            <label for="photos"> Photos</label>
-            <input type="radio" id="photos" name="top" value="photos"> &nbsp;
-            <label for="categories"> Categories</label>
-            <input type="radio" id="categories" name="top" value="categories">
-
+            <RadzenRadioButtonList @bind-Value=@value Data="@data" TextProperty="Name" ValueProperty="Id" DisabledProperty="IsDisabled" VisibleProperty="IsVisible" TValue="int" 
+            Change=@(args => OnChange(args))>
+            </RadzenRadioButtonList>
         </div>
+    </div>
 
-    </div>
+
+
     <!--PREVIEW TABLE-->
-    <div class="row">
-        <TrendTable />
-    </div>
+    @if(value == 1)
+    {
+        <div class="row">
+            <TrendTableKeywords />
+        </div>
+    }else if(value == 2)
+    {
+        <div class="row">
+            <TrendTablePhoto />
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <TrendTableCategory />
+        </div>
+    }
+
 </div>
 
+@inject IJSRuntime JsRuntime
 
 @code {
+    // Table Data
+    public class MyObject
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool? IsDisabled { get; set; }
+        public bool? IsVisible { get; set; }
+    }
+
+    IEnumerable<MyObject> data = new MyObject[] 
+    {
+        new MyObject() {
+            Id = 1,
+            Name = "Top Searched Keywords"
+        },
+        new MyObject() {
+            Id = 2,
+            Name = "Top Photos"
+        }, 
+        new MyObject() {
+            Id = 3,
+            Name = "Top Categories" 
+        }
+    };
+
+    int value = 1;
+
+
+    void OnChange(int i)
+    {
+        value = i;
+        JsRuntime.InvokeAsync<string>("console.log", i);
+    }
+
+    // Graph Data
 
     string FormatAsUSD(object value)
     {
@@ -111,22 +159,22 @@
         new DataItem
         {
             Category = "Cat",
-            View = 300
+            View = 3000
         },
         new DataItem
         {
             Category = "Dog",
-            View= 200
+            View= 2000
         },
         new DataItem
         {
             Category= "Street",
-            View= 100
+            View= 1000
         },
         new DataItem
         {
             Category = "Others",
-            View= 250
+            View= 2500
         },
     };
 
@@ -222,32 +270,6 @@
             Date = DateTime.Parse("2019-04-01"),
             Revenue = 3440
         },
-        new DataItemRevenue
-        {
-            Date = DateTime.Parse("2019-05-01"),
-            Revenue = 3140
-        },
-        new DataItemRevenue
-        {
-            Date = DateTime.Parse("2019-06-01"),
-            Revenue = 3530
-        },
-        new DataItemRevenue
-        {
-            Date = DateTime.Parse("2019-07-01"),
-            Revenue = 3740
-        },
-        new DataItemRevenue
-        {
-            Date = DateTime.Parse("2019-08-01"),
-            Revenue = 3840
-        },
-        new DataItemRevenue
-        {
-            Date = DateTime.Parse("2019-09-01"),
-            Revenue = 3730
-        },
-
     };
 
 }

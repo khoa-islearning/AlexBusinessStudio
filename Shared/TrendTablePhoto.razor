@@ -1,0 +1,51 @@
+﻿<div class="tableFixHead">
+    <table>
+        <thead>
+            <tr>
+                <th>Categories</th>
+                <th>Count</th>
+                <th>Changes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var k in photos)
+            {
+                <tr>
+                    <td>@k.Name</td>
+                    <td>@k.Value</td>
+                    @if(@k.Change > 0)
+                    {
+                        <td style = "color:green"> &uarr; @k.Change</td>   
+                    }else{
+                        <td style = "color:red"> &darr; @k.Change</td>   
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code{
+
+    class Model
+    {
+        public string Name;
+        public int Value;
+        public int Change;
+    }
+
+    Model[] photos = new Model[]
+    {
+        new Model {Name = "Cat Laying on Porch", Value = 3000, Change = 17},
+        new Model {Name = "Cat Laying on Couch", Value = 2000, Change = -5},
+        new Model {Name = "Cat eating", Value = 1000, Change = -50},
+        new Model {Name = "Dog playing", Value = 932, Change = 26},
+        new Model {Name = "Joyful Dog", Value = 815, Change = -1},
+        new Model {Name = "Vancouver Rain", Value = 700, Change = -11},
+        new Model {Name = "Snowing City", Value = 599, Change = -45},
+        new Model {Name = "Beautiful Tree", Value = 412, Change = 9},
+        new Model {Name = "Wedding Day", Value = 311, Change = 18},
+    };
+
+
+}

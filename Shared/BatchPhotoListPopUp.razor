@@ -1,0 +1,111 @@
+﻿<div class="container popup d-flex flex-column" style="height:60vh; width:90vw;top:20vh; right:15vw; border: 2px solid">
+
+    <div class="row p-1" style="height:50vh;">
+        <div class="col-9">
+            <div class="tableFixHead" style="height:45vh;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Size</th>
+                            <th>Tags</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var p in pList)
+                        {
+                            @if (chosen[p.Id])
+                            {
+                                <tr @onclick="@(() => previewPath = p.Link)">
+                                    <td style="background-color:white; border: 1px solid; padding: 1px; margin: 2px;">
+                                        @p.Name
+                                    </td>
+                                    <td style="background-color:white; border: 1px solid; padding: 1px; margin: 2px;">
+                                        <input type="text"
+                                        value=@(String.Join(" " ,p.Name.Replace(".jpg", "").Split('_').Select(e => (char.ToUpper(e[0]) + e.Substring(1)))))
+                                        style="width : 100%"/>
+                                    </td>
+                                    <td style="background-color:white; border: 1px solid; padding: 1px; margin: 2px;">
+                                        <input type="text" value=@p.Note style="width : 100%"/>
+                                    </td>
+                                     <td style="background-color:white; border: 1px solid; padding: 1px; margin: 2px;">
+                                        <input type="text" value="@p.x x @p.y" style="width : 100%" disabled />
+                                    </td>
+                                    <td style="background-color:white; border: 1px solid; padding: 1px; margin: 2px;">
+                                        <input type="text" value=@string.Join(", ", @p.TagList) style="width : 100%" onfocusin=@SetTagFocusTrue onfocusout=@SetTagFocusFalse/>
+                                    </td>
+                                     <td style="background-color:white; border: 1px solid; padding: 1px; margin: 2px">
+                                        $ <input type="text" value="0" style="width : 80%; display:inline-block"/>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>e
+                </table>
+            </div>
+        </div>
+
+        <div class="col-3">
+                <h3 class="mt-3 bold">Preview</h3>
+                @if(previewPath != null)
+                    {
+                    <RadzenImage Path=@previewPath Style="width: 100%;">
+                        </RadzenImage>
+                    }else{
+                        <div style = "height : 40%; border: solid thin gray; align-items:center; display:flex; justify-content:center; color:gray">
+                            <p>Preview Image Here</p>
+                        </div>
+                    }
+
+            @if (IsFocusTag)
+            {
+                <div>
+                    <h4 class = "mt-4 bold">Reccommend Tags:</h4>
+                    <p>Nature (1024), Animal (931)</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row  d-flex flex-column" style="align-items:center; align-self:flex-end; margin: auto">
+        <div style="justify-self:flex-end ; margin: auto">
+            <button class="btn btn-success "  style="width: auto;" @onclick="@(() => (OnClick.InvokeAsync("save")))">List and Close</button>
+            <button class="btn btn-danger"  style="width: auto;" @onclick="@(() => (OnClick.InvokeAsync("cancel")))">Cancel</button>
+        </div>
+    </div>
+
+</div>
+@using  AlexBusinessStudio.Data
+@inject IJSRuntime js;
+@code {
+    [Parameter] public PhotoModel[] pList  { get; set; }
+    [Parameter] public bool[] chosen  { get; set; }
+    [Parameter] public EventCallback<string> OnClick { get; set; }
+
+    public string previewPath = null;
+
+    public int GetFirstChosen()
+    {
+        int  i = 0;
+        while(chosen[i] == false)
+        {
+            i++;
+        }
+        return i;
+    }
+
+
+    public bool IsFocusTag = false;
+    public void SetTagFocusFalse()
+    {
+        IsFocusTag = false;
+    }
+    
+    public void SetTagFocusTrue()
+    {
+        IsFocusTag = true;
+    }
+}

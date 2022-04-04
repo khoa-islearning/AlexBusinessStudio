@@ -13,8 +13,31 @@
     </div>
 
     <div class="row" style="height:100%; padding-top: 10px">
-        <div class="col-9 overflow-scroll">
-            <HistoryQueryView />
+        <div class="col-9 tableFixHead" style="height:80vh">
+            <table  >
+                <tr>
+                    <thead>
+                        <th>Order Number</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Details</th>
+                    </thead>
+                </tr>
+                <tbody>
+
+                    @foreach(var p in hList)
+                    {
+
+                        <tr>
+                            <td>@p.OrdNumber</td>
+                            <td>@p.CustName</td>
+                            <td>@p.Date.ToShortDateString()</td>
+                            <td><a href="url">link</a></td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
         </div>
         <div class="col-3 info-bar" style="border-radius: 5px;">
             <HistorySearchBar />
@@ -22,7 +45,59 @@
     </div>
 </div>
 
-
-@code {
-
+@inject IJSRuntime JsRuntime
+@using  AlexBusinessStudio.Data
+@code 
+{
+    Random rnd = new Random();
+    public SaleHistory[] hList = new SaleHistory[100];
+    public String[] firstname = new String[]
+        {
+            "Maximilian",
+            "Brando",
+            "Wilber",
+            "Zion",
+            "Chesley",
+            "Guido",
+            "Florencio",
+            "Shaun",
+            "Jakob",
+            "Amparo",
+            "Amelie",
+            "Sonia",
+            "Alvera",
+            "Valentina",
+            "Lexie",
+            "Ethyl",
+            "Wilma",
+            "Jolie",
+            "Else",
+            "Beatrice",
+        };
+    public string[] lastname = new String[]
+        {
+        "Collier",
+        "Stoltenberg",
+        "Wilderman",
+        "Kuhlman",
+        "Wilkinson",
+        "Carroll",
+        "Kulas",
+        "Simonis",
+        "Aufderhar",
+        "Collins",
+        };
+    protected override async Task OnInitializedAsync()
+    {
+        for(int i = 0; i<100; i++)
+        {
+            hList[i] = new SaleHistory
+                {
+                    OrdNumber = i,
+                    CustName = String.Join(" ", new string[] { firstname[rnd.Next(0, 19)], lastname[rnd.Next(0, 9)] }),
+                    Date = new DateTime(rnd.Next(2021, 2022), rnd.Next(1, 12), rnd.Next(1, 28)),
+                    PhotoList = new int[] { rnd.Next(0, 4), rnd.Next(5, 9), rnd.Next(10, 14) }
+                };
+        }
     }
+}
