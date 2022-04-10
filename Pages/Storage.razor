@@ -143,8 +143,7 @@
     public PhotoModel[] pListName;
 
     public int sortBy = 0;
-    public DateTime start = new DateTime(2000,01,01);
-    public DateTime end = DateTime.Now;
+
 
 
 
@@ -155,7 +154,7 @@
         for ( int i = 0; i < display.Length;i++ ) {
             JsRuntime.InvokeAsync<string>("console.log", $"start:{s.start}, date:{pList[i].Date}, start < date : {pList[i].Date >= s.start}");
             display[i] = s.status[i%3] 
-            && (s.searchString.Count() > 0 ? pList[i].Name.Intersect(s.searchString).Count() >= 4 : true)
+            && (s.searchString.Count() > 0 ? pList[i].Name.ToLower().Intersect(s.searchString.ToLower()).Count() >= 3 : true)
             && pList[i].Date >= s.start
             && pList[i].Date <= s.end
             && (s.tagList.Count() > 0 ? pList[i].TagList.Intersect(s.tagList).Count() > 0 : true);
