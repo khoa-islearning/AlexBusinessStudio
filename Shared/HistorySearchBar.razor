@@ -1,51 +1,79 @@
 ﻿<form class="search-bar">
-    <input type="text" placeholder="Search.." style="border-radius: 5px;">
-
-    <label class="info-bar-left"> <h4>Tag</h4></label>
-    <div class="info-bar-left info-bar-item">
-        <label for="cat"> Cat </label> <input id="cat" type="radio" value="Cat" checked />
-        <br />
-        <label for="cat"> Cute </label> <input id="cat" type="radio" value="Dog" checked />
-    </div>
-
+    <input type="text" placeholder="Search" style="border-radius: 5px;" @bind-value=@searchString>
     <br />
-    <!---->
-
-
-    <label class="info-bar-left"> <h4>Purchased Date</h4></label>
+    <label class="info-bar-left"> <h4>Purchase Date:</h4></label>
     <div class="info-bar-left info-bar-item">
         <label for="start_date">Start date:</label>
-        <input type="date" id="start_date" name="">
+        <RadzenDatePicker @bind-Value=@start DateFormat="d"   />
     </div>
 
     <div class="info-bar-left info-bar-item">
         <label for="end_date">End date:</label>
-        <input type="date" id="end_date" name="">
-    </div>
-
+         <RadzenDatePicker @bind-Value=@end DateFormat="d"   />
+    </div
     <br />
 
 
-    <label class="info-bar-left"> <h4>Paid Amount</h4></label>
-    <div class="info-bar-left info-bar-item">
-        <label for="min">Min:</label>
-        <input type="number" id="min" name="min" min="1" max="5"> $
-        <br />
-        <label for="max">Max:</label>
-        <input type="number" id="max" name="max" min="1" max="5"> $
-    </div>
-
-    <br />
-
+    <label class="info-bar-left"> <h4>Paid Amount:</h4></label>
     <div class="info-bar-left">
-        <label for="cars">Sort by:</label>
-        <select name="cars" id="cars">
-            <option value="volvo">Size</option>
-            <option value="saab">Name</option>
-            <option value="opel">Date</option>
-        </select>
+        <label class="info-bar-left"> Min:</label>
+        <RadzenNumeric TValue="int" Min="0" Max="100" @bind-Value=@min/>
+        <label class="info-bar-left"> Max:</label>
+        <RadzenNumeric TValue="int" Min="0" Max="100" @bind-Value=@max/>
+    <br />
+    <br/>
+    <div class="info-bar-left">
+        <label class="info-bar-left"> <h4>Sort by:</h4></label>
+        <RadzenDropDown TValue="int" @bind-value=sort Data=@data TextProperty="Name" ValueProperty="Id" />
+    </div>
     </div>
     <br />
-
-    <input type="submit" value="Search" style="width: 100px;">
 </form>
+<div class="row  d-flex flex-column" style="align-items:center; align-self:flex-end; margin: auto">
+    <div style="justify-self:flex-end ; margin: auto; display:flex; flex-direction: column; align-items : center">
+        <button  style="width: 100pxmax-content;" class="btn btn-success" @onclick="@(() => OnSearch.InvokeAsync(new HistorySearchArg(sort, start, end,searchString, min, max)))">
+            Search
+        </button>
+    </div>
+</div>
+
+
+
+@inject IJSRuntime js
+@using  AlexBusinessStudio.Data
+@code{
+
+    [Parameter] public EventCallback<HistorySearchArg> OnSearch { get; set; }
+    public string searchString = "";
+    int sort = 0;
+    public DateTime start = new DateTime(2000,01,01);
+    public DateTime end = DateTime.Now;
+    public int min = 0;
+    public int max = 0;
+
+
+    IEnumerable<string> multipleValues = new string[] {};
+    
+    public class MyObject
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+
+    IEnumerable<MyObject> data = new MyObject[] 
+    {
+        new MyObject() {
+            Id = 0,
+            Name = "Order Number"
+        },
+        new MyObject() {
+            Id = 1,
+            Name = "Paid Amount"
+        }, 
+        new MyObject() {
+            Id = 2,
+            Name = "Date" 
+        }
+    };
+}

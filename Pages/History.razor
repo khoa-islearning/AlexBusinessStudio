@@ -25,32 +25,60 @@
                 </tr>
                 <tbody>
 
-                    @foreach(var p in hList)
+                    @foreach(var p in GetList())
                     {
-
-                        <tr>
-                            <td>@p.OrdNumber</td>
-                            <td>@p.CustName</td>
-                            <td>@p.Date.ToShortDateString()</td>
-                            <td><a href="url">link</a></td>
-                        </tr>
+                        if(display[p.OrdNumber])
+                        {
+                            <tr>
+                                <td>@(p.OrdNumber + 1000)</td>
+                                <td>@p.CustName</td>
+                                <td>@p.Date.ToShortDateString()</td>
+                                <td style="justify-content:center; display:flex" @onclick="@(() => showDetail(p.OrdNumber))"><a class="btn btn-info">Details</a></td>
+                            </tr>
+                        }
                     }
                 </tbody>
 
             </table>
         </div>
         <div class="col-3 info-bar" style="border-radius: 5px;">
-            <HistorySearchBar />
+            <HistorySearchBar OnSearch=@changeSearch/>
         </div>
     </div>
 </div>
+@if (IsShowDetail)
+{
+    <HistoryDetail history=@chosen priceList=@priceList OnClick=@hideDetail/>
+}
 
 @inject IJSRuntime JsRuntime
 @using  AlexBusinessStudio.Data
 @code 
 {
+    public int[] priceList = new int[15];
     Random rnd = new Random();
     public SaleHistory[] hList = new SaleHistory[100];
+    public SaleHistory[] hListNo = new SaleHistory[100];
+    public SaleHistory[] hListAmount = new SaleHistory[100];
+    public SaleHistory[] hListDate = new SaleHistory[100];
+    public bool[] display = new bool[100];
+    public int sortBy = 0;
+    public DateTime start = new DateTime(2000,01,01);
+    public DateTime end = DateTime.Now;
+    public SaleHistory chosen;
+    public bool IsShowDetail = false;
+
+    public void showDetail(int i)
+    {
+        chosen = hList[i];
+        IsShowDetail = true;
+    }
+
+    public void hideDetail()
+    {
+        IsShowDetail = false;
+    }
+
     public String[] firstname = new String[]
         {
             "Maximilian",
@@ -75,29 +103,80 @@
             "Beatrice",
         };
     public string[] lastname = new String[]
+    {
+    "Collier",
+    "Stoltenberg",
+    "Wilderman",
+    "Kuhlman",
+    "Wilkinson",
+    "Carroll",
+    "Kulas",
+    "Simonis",
+    "Aufderhar",
+    "Collins",
+    };
+
+    public void changeSearch(HistorySearchArg s)
+    {
+        sortBy = s.sort;
+
+        for ( int i = 0; i < display.Length;i++ ) {
+            display[i] = (s.searchString.Count() > 0 ? hList[i].CustName.ToLower().Intersect(s.searchString.ToLower()).Count() >= 3 : true)
+        && hList[i].Date >= s.start
+            && hList[i].Date <= s.end
+            && ((s.min < s.max) ? (hList[i].Sum >= s.min && hList[i].Sum <= s.max) : true);
+        }
+
+    } 
+
+    public SaleHistory[] GetList()
+    {
+        if (sortBy == 0)
         {
-        "Collier",
-        "Stoltenberg",
-        "Wilderman",
-        "Kuhlman",
-        "Wilkinson",
-        "Carroll",
-        "Kulas",
-        "Simonis",
-        "Aufderhar",
-        "Collins",
-        };
+            return hListNo;
+        }else if (sortBy == 1)
+        {
+            return hListAmount;
+        }
+        return hListDate;
+    }
+
     protected override async Task OnInitializedAsync()
     {
+        for ( int i = 0; i < display.Length;i++ ) {
+            display[i] = true;
+        }
+
+
+        for(int id = 0; id < priceList.Length; id++)
+        {
+            priceList[id] = rnd.Next(5, 50);
+        }
+
         for(int i = 0; i<100; i++)
         {
+            int[] aList = new int[] { rnd.Next(0, 4), rnd.Next(5, 9), rnd.Next(10, 14) };
             hList[i] = new SaleHistory
                 {
                     OrdNumber = i,
                     CustName = String.Join(" ", new string[] { firstname[rnd.Next(0, 19)], lastname[rnd.Next(0, 9)] }),
                     Date = new DateTime(rnd.Next(2021, 2022), rnd.Next(1, 12), rnd.Next(1, 28)),
-                    PhotoList = new int[] { rnd.Next(0, 4), rnd.Next(5, 9), rnd.Next(10, 14) }
+                    PhotoList = aList,
+                    Sum = priceList[aList[0]] + priceList[aList[1]] + priceList[aList[2]]
                 };
         }
+
+        hListNo = new SaleHistory[100];
+        Array.Copy(hList, hListNo, hList.Length);
+        Array.Sort(hListNo, (p1,p2) => p1.OrdNumber.CompareTo(p2.OrdNumber));
+        
+        hListDate = new SaleHistory[100];
+        Array.Copy(hList, hListDate, hList.Length);
+        Array.Sort(hListDate, (p1,p2) => p1.Date.CompareTo(p2.Date));
+        
+        hListAmount = new SaleHistory[100];
+        Array.Copy(hList, hListAmount, hList.Length);
+        Array.Sort(hListAmount, (p1,p2) => p1.Sum.CompareTo(p2.Sum));
+        Array.Sort(hListAmount, (p1,p2) => p1.Sum.CompareTo(p2.Sum));
     }
 }
