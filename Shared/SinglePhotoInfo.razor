@@ -1,35 +1,82 @@
 ﻿@using Radzen
-<div form class="search-bar">
+<div form class="search-bar" >
 
     <h3>Details</h3>
 
-    <p>
-        <span style="font-size:1.2rem;">Name:</span>&nbsp; &nbsp; &nbsp; name.jpg &nbsp;
+    <br />
+    <div class="info-bar-left info-bar-item">
+        <label class="info-bar-left info-bar-item" <h4>Name: </h4></label>  &nbsp
+        <input type="text" @bind-value=@p.Name style=" width : 50%" /> &nbsp;
         <i class="fa fa-edit" style="justify-self:center"></i>
-    </p>
-    <p><span style="font-size:1.2rem;">Size:</span>&nbsp; &nbsp; &nbsp; 1920x1200</p>
-    <p>
-        <span style="font-size:1.2rem;">Tags:</span>&nbsp; &nbsp; &nbsp; cat, cute &nbsp;
-        <i class="fa fa-edit" style="justify-self:center"></i>
-    </p>
-    <div>
-        <span style="font-size:1.2rem;">Category:</span>
-        <select name="cars" id="cars">
-            <option value="volvo">Animal</option>
-            <option value="saab">Animal</option>
-            <option value="opel">Animal</option>
-        </select>
     </div>
-    <p>
-        <span style="font-size:1.2rem;">Date:</span>&nbsp; &nbsp; &nbsp; 22/01/30 &nbsp;
-        <i class="fa fa-edit" style="justify-self:center"></i>
-    </p>
 
-    <label for="w3review">Extra notes:</label>
-    <textarea id="w3review" name="w3review" rows="4" cols="40">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </textarea>
+    <br />
+    <div class="info-bar-left info-bar-item">
+        <label class="info-bar-left info-bar-item"> <h4>Size: </h4></label>  &nbsp;
+        <span>@p.x x @p.y</span>
+    </div>
+
+    <br />
+    <div class="info-bar-left info-bar-item">
+        <label class="info-bar-left info-bar-item"> <h4>Tag: </h4></label>  &nbsp;
+        <input type="text" value=@string.Join(", ", @p.TagList) onfocusin=@SetTagFocusTrue onfocusout=@SetTagFocusFalse />
+        <i class="fa fa-edit" style="justify-self:center"></i>
+        
+    </div>
+
+    @if (IsFocusTag)
+    {
+        <div class="info-bar-left info-bar-item" style="font-size:70%; color: blue">
+            <label class="info-bar-left info-bar-item"> Recommended Tags: </label>
+            Nature, Animal
+        </div>
+    }
+
+
+    <br />
+    <div class="info-bar-left info-bar-item">
+        <label class="info-bar-left info-bar-item"> <h4>Date: </h4></label>  &nbsp;
+        <input type="text" value=@(p.Date.ToShortDateString()) />
+        <i class="fa fa-edit" style="justify-self:center"></i>
+    </div>
+
+    <br />
+    <div class="info-bar-left info-bar-item" style="width:100%">
+        <label class=""> <h4>Extra note: </h4></label>  <br />
+        <div style="width:100%; display:flex; flex-direction:row"> 
+            <textarea type="text" @bind=@p.Note style="margin:auto; width:100%"></textarea>
+        </div>
+    </div>
+
     <br /><br />
-    <input type="submit" value="Save" style="width: 100px;">
+
+    <button class="btn btn-success" style="width: 100px;" @onclick=@Save>Save</button>
 
 </div>
+
+@inject IJSRuntime JsRuntime
+@using  AlexBusinessStudio.Data
+
+
+@code{
+    [Parameter]
+    public PhotoModel p { get; set; }
+    public bool IsFocusTag = false;
+    [Parameter] public EventCallback<string> OnSave { get; set; }
+
+    public void SetTagFocusFalse()
+    {
+        IsFocusTag = false;
+    }
+
+    public void SetTagFocusTrue()
+    {
+        IsFocusTag = true;
+    }
+
+    public void Save()
+    {
+        OnSave.InvokeAsync(p.Name);
+        JsRuntime.InvokeAsync<string>("alert", "Changes Saved");
+    }
+}

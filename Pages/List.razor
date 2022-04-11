@@ -1,16 +1,21 @@
-@page "/list"
+@page "/list/{s_id}"
 @layout AdminLayout
 
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10"></div>
+        <div class="col-md-1">
+                <h3 class="mt-3">@Name</h3>
+        </div>
+
+
+        <div class="col-md-9"></div>
 
 
 
         <div class="col-md-2 d-flex align-items-baseline flex-column" style="padding-top : 25px;">
             <!--TODO convert styles to css-->
-            <button class="btn btn-danger" style="display:flex; justify-content:right;; align-self: flex-start">
+            <button class="btn btn-danger" style="display:flex; justify-content:right;; align-self: flex-start" @onclick=@TakeDown>
                 <RadzenIcon style="justify-content:center; align-content:center" Icon="cancel_presentation" IconStyle="IconStyle.Light" />&nbsp; Take down
             </button>
         </div>
@@ -21,12 +26,183 @@
 
     <div class="row p-1">
         <div class="col-9">
-            <SingleListView/>
+            <div class="col-12">
+                <RadzenImage Path=@pList[id].Link Style="width: 100%;">
+                </RadzenImage>
+            </div>
         </div>
 
         <div class="col-3 info-bar" style="border-radius:5px">
-            <SingleListInfo/>
-
+            <SingleListInfo p=pList[id] OnSave=@Save/>
         </div>
     </div>
 </div>
+
+
+
+@inject IJSRuntime JsRuntime
+@using  AlexBusinessStudio.Data
+@inject NavigationManager NavManager
+
+@code{
+    [Parameter]
+    public String s_id{ get; set; }
+    public int id;
+    public string Name;
+
+    public void Save(string n)
+    {
+        Name = n;
+    }
+
+    public void TakeDown()
+    {
+        JsRuntime.InvokeAsync<string>("alert", "Listing Taken Down!\nRedirecting to Listings");
+        NavManager.NavigateTo("/listings");
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        id = Int32.Parse(s_id);
+        Name = (String.Join(" ", pList[id].Name.Replace(".jpg", "").Split('_').Select(e => (char.ToUpper(e[0]) + e.Substring(1)))));
+    }
+
+
+    public PhotoModel[] pList = new PhotoModel[]
+        {
+        new PhotoModel
+        {
+            Id = 0,
+            Name = "cow.jpg",
+            Link = "https://cdn.pixabay.com/photo/2022/02/17/17/21/cows-7019167__340.jpg",
+            Note = "Taken in BaVi",
+            Date = new DateTime(2020, 1, 1),
+           
+        },
+        new PhotoModel
+        {
+            Id = 1,
+            Name = "staring.jpg",
+            Link = "https://cdn.pixabay.com/photo/2022/03/27/11/23/cat-7094808__340.jpg",
+            Note = "Neighbor's cat",
+            Date = new DateTime(2021, 1, 30),
+            TagList = new string[] {"Cat", "Animal"}
+        },
+        new PhotoModel
+        {
+            Id = 2,
+            Name = "eating_sheep.jpg",
+            Link = "https://cdn.pixabay.com/photo/2022/02/12/21/02/heather-7009925__340.jpg",
+            Note = "Northen farm",
+            Date = new DateTime(2022, 01, 29)
+        },
+        new PhotoModel
+        {
+            Id = 3,
+            Name = "angel.jpg",
+            Link = "https://cdn.pixabay.com/photo/2022/03/01/20/58/peace-genius-7042013__340.jpg",
+            Note = "City Square",
+            Date = new DateTime(2019, 05, 19),
+            TagList = new string[] {"City"}
+
+
+        },
+        new PhotoModel
+        {
+            Id = 4,
+            Name = "street_lamp.jpg",
+            Link = "https://cdn.pixabay.com/photo/2013/03/02/02/41/alley-89197__480.jpg",
+            Note = "Random Nights",
+            TagList = new string[] {"City"}
+
+        },
+        new PhotoModel
+        {
+            Id = 5,
+            Name = "mountain.jpg",
+            Link = "https://cdn.pixabay.com/photo/2022/01/12/19/28/mountains-6933693__340.jpg",
+            Note = "Mountain House",
+            Date = new DateTime(2021, 03, 12),
+            TagList = new string[] {"Nature"}
+
+        }
+        ,new PhotoModel
+        {
+            Id = 6,
+            Name = "windmill.jpg",
+            Link = "https://cdn.pixabay.com/photo/2022/01/10/15/29/wind-mills-6928590__340.jpg",
+            Note = "Sunny Day",
+            Date = new DateTime(2018,07, 20),
+            TagList = new string[] {}
+        }
+        ,new PhotoModel
+        {
+            Id = 7,
+            Name = "calf.jpg",
+            Link = "https://cdn.pixabay.com/photo/2022/03/25/10/19/calf-7090719__340.jpg",
+            Note = "This calf came out of nowhere",
+            Date = new DateTime(2019, 04, 30)
+        },
+        new PhotoModel
+        {
+            Id =8,
+            Name = "stair.jpg",
+            Link = "https://cdn.pixabay.com/photo/2021/12/07/14/00/river-6853339__340.jpg",
+            Note = "Wet stairs, cautions",
+            Date = new DateTime(2020, 12, 12),
+            TagList = new string[] {"City", "Rain"}
+        },
+        new PhotoModel
+        {
+            Id = 9,
+            Name = "town.jpg",
+            Link = "https://cdn.pixabay.com/photo/2021/08/30/21/29/port-6587129__480.jpg",
+            Note = "On a sailboat",
+            Date = new DateTime(2019, 3, 20),
+            TagList = new string[] {"City", "Nature", "Ocean"}
+        },
+        new PhotoModel
+        {
+            Id = 10,
+            Name = "hare.jpg",
+            Link = "https://cdn.pixabay.com/photo/2021/04/20/15/04/hare-6194141__340.jpg",
+            Note = "On a soccer field",
+            TagList = new string[] {"Cycling", "Sport"}
+        },
+        new PhotoModel
+        {
+            Id = 11,
+            Name = "cycling.jpg",
+            Link = "https://cdn.pixabay.com/photo/2022/02/27/06/33/man-7036709__340.jpg",
+            Note = "My Friend",
+            Date = new DateTime(2019, 5, 25)
+        },
+        new PhotoModel
+        {
+            Id = 12,
+            Name = "small_bird.jpg",
+            Link = "https://cdn.pixabay.com/photo/2022/02/23/18/08/kingfisher-7031148__480.jpg",
+            Note = "cute",
+            Date = new DateTime(2022, 1, 29),
+            TagList = new string[] {"Bird", "Animal", "Nature"}
+        },
+        new PhotoModel
+        {
+            Id = 13,
+            Name = "flower_dog.jpg",
+            Link = "https://cdn.pixabay.com/photo/2021/09/19/12/19/animal-6637774__340.jpg",
+            Note = "dog and flower",
+            Date = new DateTime(2021, 12, 29),
+            TagList = new string[] {"Dog", "Animal", "Nature"}
+        },
+        new PhotoModel
+        {
+            Id = 14,
+            Name = "staring_dog.jpg",
+            Link = "https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416__340.jpg",
+            Note = "staring context",
+            TagList = new string[] {"Dog", "Animal"}
+        },
+        };
+}
