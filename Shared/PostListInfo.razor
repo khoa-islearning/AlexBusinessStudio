@@ -1,28 +1,97 @@
 ﻿@using Radzen
 <div form class="search-bar">
-
     <h3>Listing</h3>
 
-    <p style="align-self:flex-start">
-        <span style="font-size:1.2rem;">Title:</span>&nbsp; &nbsp; &nbsp; Gazing Cat&nbsp;
+     <br />
+    <div class="info-bar-left info-bar-item">
+        <label class="info-bar-left info-bar-item" <h4>Title: </h4></label>  &nbsp
+        <input type="text"
+        @bind-value=@Name
+        style=" width : 50%" /> &nbsp;
         <i class="fa fa-edit" style="justify-self:center"></i>
-    </p>
-    <label for="w3review" style="align-self:flex-start">Description:</label>
-    <textarea id="w3review" name="w3review" rows="4" cols="35       ">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </textarea> <br />
-    <p style="align-self:flex-start"><span style="font-size:1.2rem;">Size:</span>&nbsp; &nbsp; &nbsp; 1920x1200</p>
-    <p style="align-self:flex-start">
-        <span style="font-size:1.2rem;">Tags:</span>&nbsp; &nbsp; &nbsp; cat, cute &nbsp;
-        <i class="fa fa-edit" style="justify-self:center"></i>
-    </p>
-
-    <p style="align-self:flex-start">
-        <span style="font-size:1.2rem;">Price:</span>&nbsp; &nbsp; &nbsp; 20$    &nbsp;
-        <i class="fa fa-edit" style="justify-self:center"></i>
-    </p>
+    </div>
 
     <br />
-    <input type="submit" value="List" style="width: 100px;">
+    <div class="info-bar-left info-bar-item" style="width:100%">
+        <label class=""> <h4>Description: </h4></label>  <br />
+        <div style="width:100%; display:flex; flex-direction:row"> 
+            <textarea type="text" @bind=@p.Note style="margin:auto; width:100%"></textarea>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="info-bar-left info-bar-item">
+        <label class="info-bar-left info-bar-item"> <h4>Size: </h4></label>  &nbsp;
+        <span>@p.x x @p.y</span>
+    </div>
+
+    <br />
+    <div class="info-bar-left info-bar-item">
+        <label class="info-bar-left info-bar-item"> <h4>Tag: </h4></label>  &nbsp;
+        <input type="text" value=@string.Join(", ", @p.TagList) onfocusin=@SetTagFocusTrue onfocusout=@SetTagFocusFalse />
+        <i class="fa fa-edit" style="justify-self:center"></i>
+        
+    </div>
+
+    @if (IsFocusTag)
+    {
+        <div class="info-bar-left info-bar-item" style="font-size:70%; color: blue">
+            <label class="info-bar-left info-bar-item"> Recommended Tags: </label>
+            Nature, Animal
+        </div>
+    }
+
+
+    <br />
+    <div class="info-bar-left info-bar-item">
+        <label class="info-bar-left info-bar-item"> <h4>Date: </h4></label>  &nbsp;
+        <input type="text" value=@(p.Date.ToShortDateString()) />
+        <i class="fa fa-edit" style="justify-self:center"></i>
+    </div>
+
+    <br />
+
+    <div class="info-bar-left">
+        <label class="info-bar-left"> Price:</label>
+        <RadzenNumeric TValue="int" Min="0" Max="100" Value=0 /> $
+    </div>
+
+    <br /><br />
+
+    <button class="btn btn-success" style="width: 100px;" @onclick=@Save>List</button>
 
 </div>
+
+@inject IJSRuntime JsRuntime
+@using  AlexBusinessStudio.Data
+@inject NavigationManager NavManager
+
+@code{
+    [Parameter]
+    public PhotoModel p { get; set; }
+    public bool IsFocusTag = false;
+    public string Name;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Name = (String.Join(" ", p.Name.Replace(".jpg", "").Split('_').Select(e => (char.ToUpper(e[0]) + e.Substring(1)))));
+    }
+
+
+    public void SetTagFocusFalse()
+    {
+        IsFocusTag = false;
+    }
+
+    public void SetTagFocusTrue()
+    {
+        IsFocusTag = true;
+    }
+
+    public void Save()
+    {
+        JsRuntime.InvokeAsync<string>("alert", "Post Listed\n Redirecting to the isting");
+        NavManager.NavigateTo($"/list/{p.Id}");
+    }
+}

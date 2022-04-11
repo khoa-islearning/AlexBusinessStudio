@@ -24,9 +24,10 @@
                     <RadzenIcon style="justify-content:center; align-content:center" Icon="deselect" IconStyle="IconStyle.Light" />&nbsp; Deselect
                 </button>
             }else if(@GetChosenCount() == 1){
-                 <button class="btn btn-success" style="display:flex; justify-content:right; align-self: flex-end;margin : 3px " >
+                 <NavLink class="btn btn-success" style="display:flex; justify-content:right; align-self: flex-end;margin : 3px; text-decoration : none !important"  href=@($"/photo/{pList.FirstOrDefault(e => chosen[e.Id]).Id}")
+                 Match="NavLinkMatch.All">
                     <RadzenIcon style="justify-content:center; align-content:center" Icon="visibility" IconStyle="IconStyle.Light" />&nbsp; View Image
-                </button>
+                </NavLink>
             }
 
             @if(@GetChosenCount() == 0)
