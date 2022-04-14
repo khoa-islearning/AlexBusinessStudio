@@ -1,0 +1,92 @@
+@page "/picture"
+@layout AdminLayout
+@using Radzen
+@inject NavigationManager NavManager
+
+
+<section>
+<div style="background-color: #333; overflow: hidden; padding: 3px; width:80%;">
+  <!--- all links for nav bar-->
+  <a href="/landing" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;" >Home</a>
+    <a href="/cart" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Cart</a>
+    <a href="/Gallery" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Gallery</a>
+    <a style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Contact Me</a>
+</div>
+</section>
+<div style="width:100%">
+  <div style="width:80%"><hr>
+    <div style="display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 0.1fr 1fr 0.1fr;
+    grid-template-areas: 
+            'a a c'
+            'd d h'
+            'd d e'
+            'g g f'; ">
+      <div style="grid-area:a; height: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h1 style="text-align: center; font-size: 100px;">MAJESTIC CAT</h1>
+      </div>
+      <div style="border: 5px solid #333; grid-area:c;">
+        <div style="padding: 5px">
+          <p>Author: Alex<br>
+          Date of Photo: Feb 22, 2022<br>
+          Orientation: Landscape<br>
+          Format: PNG<br>
+          Tags: Cats, B&W, Maine Coon, Landscape<br>
+          Usage: High<br>
+          Popularity: High<br>
+          Price: $29.99</p>
+        </div>
+      </div>
+
+      
+      <div style="border: 5px solid #333; grid-area:d; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <img src="MaineCoon3.png" asp-append-version="true" width="600px" />
+      </div>
+      <div style="border: 5px solid #333; grid-area:e;">
+        <div>
+          <h2 style="text-align:center">Description</h2>
+          <hr>
+        </div>
+        <div>
+          <p style="padding: 5px">
+            A majestic cat that not only looks majestic but IS majestic and it knows its majestic because of the confidence brimming within it. When you open the dictionary and search the word majestic, you dont see a text definition but, you see a picture of this... dare I say, Majestic Cat!
+          </p>
+        </div>
+      </div>
+      <div style=" grid-area:f;">
+        <div>
+          <h2 style="text-align: center;">Questions?</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-items: center; align-items: center;">
+          <form >
+            <label for="fname">Email:</label>
+            <input type="text" id="fname" name="fname"><br><br>
+            <label style="margin-left: -10px;" for="lname">Inquiry:</label>
+            <input type="text" id="lname" name="lname"><br><br>
+            <input style="margin-left: 97px;" type="submit" value="Send">
+          </form>
+        </div>
+      </div>
+      <div style="grid-area:g; margin-top: 25px;">
+        <div>
+          <h2 style="text-align: center;">Please Note</h2>
+        </div>
+        <div>
+          <h3 style="text-align: center; width:95%;"> Pictures on this website are non-refundable and not distributable under any circumstances except through the permission of the author!</h3>
+        </div>      </div>
+      <div style=" grid-area:h; text-align: center;">
+        <h1>
+          Add to cart
+        </h1>
+        <hr>
+        <div><button style="height: 100px; width: 300px;" type="button" @onclick="@(()=>NavManager.NavigateTo("/cart"))">Add to cart</button></div>
+      </div>
+      <div style="background-color: pink; grid-area:i;">
+        <img src="https://placehold.it/1327x817" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
+<hr style="width:80%;">

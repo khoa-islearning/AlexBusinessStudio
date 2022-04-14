@@ -1,0 +1,214 @@
+@page "/filterzero"
+@layout AdminLayout
+@using Radzen
+@inject NavigationManager NavManager
+
+ @code {
+       private bool IsShow   {get;set;} = false;
+       private void Show()
+       {
+           IsShow =   !IsShow;
+       }
+
+       private bool IsPersian   {get;set;} = false;
+       private void ShowPersian()
+       {
+           IsPersian =   !IsPersian;
+       }    
+
+       private bool IsMaineCoon   {get;set;} = false;
+       private void ShowMaineCoon()
+       {
+           IsMaineCoon =   !IsMaineCoon;
+       } 
+       private bool IsBengal   {get;set;} = false;
+       private void ShowBengal()
+       {
+           IsBengal =   !IsBengal;
+       }
+       private bool IsRagdoll   {get;set;} = false;
+       private void ShowRagdoll()
+       {
+           IsRagdoll =   !IsRagdoll;
+       }
+       private bool IsBW   {get;set;} = false;
+       private void ShowBW()
+       {
+           IsBW =   !IsBW;
+       }
+       private bool IsColour   {get;set;} = false;
+       private void ShowColour()
+       {
+           IsColour =   !IsColour;
+       }        
+       private bool IsLandscape   {get;set;} = false;
+       private void ShowLandscape()
+       {
+           IsLandscape =   !IsLandscape;
+       }
+       private bool IsPortrait   {get;set;} = false;
+       private void ShowPortrait()
+       {
+           IsPortrait =   !IsPortrait;
+       }                
+ } 
+
+<div style="width: 100vw; height: 100vh;">
+<section>
+  <div style="background-color: #333; overflow: hidden; padding: 3px; width:80%;">
+    <!--- all links for nav bar-->
+    <a href="/landing" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;" >Home</a>
+    <a href="/cart" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Cart</a>
+    <a href="/Gallery" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Gallery</a>
+    <a href="/Contact Me" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Contact Me</a>
+  </div>
+  </section>
+<section>
+  <hr style="width:80%;">
+  <div style="width:80%; height: 300px;   background-image: url('trees.png');   background-size: cover;   display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <h1 style="font-size: 500%; color: green;"> Welcome to My Gallery</h1>
+  </div>
+  <hr style="width:80%;">
+</section>
+
+    <div style="width:75%; display: flex; flex-direction: row; align-items:flex-end; justify-content: space-between;">
+      <button @onclick="@Show">Show/Hide Name & Price</button>
+      <div>
+        <a href="/filterzero"> filter </a>
+      </div>
+    </div>
+
+    <hr style="width:80%;">
+    <div style="width:80%; display: flex; flex-direction: row; gap:15px">
+<div style=" border: 5px solid #333; height: 750px; padding:10px; width:20%;">
+        <h1>Filter</h1>
+        <hr>
+        <h4>Cats</h4><br>
+        <input type="checkbox" id="filter1" name="filter1" value="Persian Cat" @onclick="@ShowPersian" checked>
+        <label for="filter1" > Persian Cat</label><br>
+        <input type="checkbox" id="filter2" name="filter2" value="Maine Coon" @onclick="@ShowMaineCoon" checked>
+        <label for="filter2"> Maine Coon</label><br>
+        <input type="checkbox" id="filter3" name="filter3" value="Bengal Cat" @onclick="@ShowBengal"checked>
+        <label for="filter3"> Bengal Cat</label><br>
+        <input type="checkbox" id="filter4" name="filter4" value="Ragdoll" @onclick="@ShowRagdoll" checked>
+        <label for="filter4"> Ragdoll</label><br>
+
+        <hr>
+        <h4>Type</h4><br>
+        <input type="checkbox" id="filter1" name="filter1" value="Persian Cat" @onclick="@ShowColour" checked>
+        <label for="filter1"> Colour</label><br>
+        <input type="checkbox" id="filter2" name="filter2" value="Maine Coon" @onclick="@ShowBW" checked>
+        <label for="filter2"> Black & White</label><br>
+
+
+        <hr>
+        <h4>Orientation</h4><br>
+        <input type="checkbox" id="filter1" name="filter1" value="Persian Cat" @onclick="@ShowLandscape"  checked>
+        <label for="filter1"> Landscape</label><br>
+        <input type="checkbox" id="filter1" name="filter1" value="Persian Cat" @onclick="@ShowPortrait" checked>
+        <label for="filter1"> Portrait</label><br>
+    </div>
+
+    <div style="width: 70%">
+      <div class="row">
+        <div class ="column">
+            <div hidden= "@IsPersian" @onclick="@(()=>NavManager.NavigateTo("/picture"))">
+              <img src="persian1.png"  width="100%"/>
+              <p hidden="@IsShow">I am Blazor $25</p>
+            </div>
+            <div hidden= "@IsMaineCoon" @onclick="@(()=>NavManager.NavigateTo("/picture"))">
+            <img src="MaineCoon1.png"  width="100%" />
+            <p hidden="@IsShow">I am Blazor $25</p>
+            </div>
+            <div hidden= "@IsBengal" @onclick="@(()=>NavManager.NavigateTo("/picture"))">
+            <img src="bengal1.webp"  width="100%" />
+            <p hidden="@IsShow">I am Blazor $25</p>
+            </div>
+            <div hidden= "@IsRagdoll" @onclick="@(()=>NavManager.NavigateTo("/picture"))">
+            <img src="ragdoll1.jpg"  width="100%" />
+            <p hidden="@IsShow">I am Blazor $25</p>
+            </div>
+            
+        </div>
+        <div class ="column">
+        <div hidden= "@IsRagdoll" @onclick="@(()=>NavManager.NavigateTo("/picture"))">
+            <img src="ragdoll2.jpg"  width="100%" />
+            <p hidden="@IsShow">I am Blazor $25</p>
+            </div>
+        <div hidden= "@IsBengal" @onclick="@(()=>NavManager.NavigateTo("/picture"))">
+        <img src="bengal2.jpg" asp-append-version="true" width="100%" />
+            <p hidden="@IsShow">I am Blazor $25</p>
+        </div>
+            <div hidden= "@IsPersian" @onclick="@(()=>NavManager.NavigateTo("/picture"))">
+            <img src="persian2.png" asp-append-version="true" width="100%" />
+            <p hidden="@IsShow">I am Blazor $25</p>
+            </div>
+            <div hidden= "@IsMaineCoon" @onclick="@(()=>NavManager.NavigateTo("/picture"))">
+            <img src="MaineCoon2.png" asp-append-version="true" width="100%" />
+            <p hidden="@IsShow">I am Blazor $25</p>
+            </div>
+            
+        </div>
+        <div class ="column">
+        <div hidden= "@IsMaineCoon" @onclick="@(()=>NavManager.NavigateTo("/picture"))"><img src="MaineCoon3.png" asp-append-version="true" width="100%"/>
+            <p hidden="@IsShow">I am Blazor $25</p></div>
+            <div hidden= "@IsRagdoll" @onclick="@(()=>NavManager.NavigateTo("/picture"))"><img src="ragdoll3.jpg" asp-append-version="true" width="100%"/>
+            <p hidden="@IsShow">I am Blazor $25</p></div>
+        <div hidden= "@IsBengal" @onclick="@(()=>NavManager.NavigateTo("/picture"))"><img src="bengal3.jpg" asp-append-version="true" width="100%"/>
+            <p hidden="@IsShow">I am Blazor $25</p></div>
+        <div hidden= "@IsPersian" @onclick="@(()=>NavManager.NavigateTo("/picture"))"><img src="persian3.jpg" asp-append-version="true" width="100%"/>
+            <p hidden="@IsShow">I am Blazor $25</p></div>
+
+            
+        </div>
+        <div class ="column">
+        <div hidden= "@IsMaineCoon" @onclick="@(()=>NavManager.NavigateTo("/picture"))"><img src="MaineCoon4.png" asp-append-version="true" width="100%"/>
+            <p hidden="@IsShow">I am Blazor $25</p></div>
+        <div hidden= "@IsPersian" @onclick="@(()=>NavManager.NavigateTo("/picture"))"><img src="persian4.jpg" asp-append-version="true" width="100%"/>
+            <p hidden="@IsShow">I am Blazor $25</p></div>
+        <div hidden= "@IsBengal"  @onclick="@(()=>NavManager.NavigateTo("/picture"))"><img src="bengal4.webp" asp-append-version="true" width="100%"/>
+            <p hidden="@IsShow">I am Blazor $25</p></div>
+        <div hidden= "@IsRagdoll"  @onclick="@(()=>NavManager.NavigateTo("/picture"))"><img src="ragdoll4.jpg" asp-append-version="true" width="100%"/>
+            <p hidden="@IsShow">I am Blazor $25</p></div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    
+
+
+<div>
+  <hr style="width:80%;">
+</div>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+.column img {
+  margin-top: 12px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+

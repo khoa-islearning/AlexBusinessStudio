@@ -1,0 +1,87 @@
+@page "/noresult"
+@layout AdminLayout
+@using Radzen
+
+
+    <section>
+      <div style="background-color: #333; overflow: hidden; padding: 3px; width:73%;">
+        <!--- all links for nav bar-->
+        <a href="/landing" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;" >Home</a>
+    <a href="/cart" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Cart</a>
+    <a href="/Gallery" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Gallery</a>
+    <a style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Contact Me</a>
+      </div>
+      </section>
+      
+  
+      <hr style="width:1450px;">
+      <h1 style="text-align:center; width:1400px">
+        No results found for "rats"
+      </h1>
+      <hr style="width:1450px;">
+  
+      <div style="width:100%";>
+        <div style="width:80%">
+          <div style="display: grid;
+          grid-gap: 10px;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          grid-template-rows: 0.1fr 1fr 1fr 1fr;
+          grid-template-areas: 
+                  'a a a a '
+                  'k k k k '
+                  'k k k k'
+                  'k k k k'; ">
+                  <div style="grid-area:a; width:75%; display: flex; flex-direction: row; align-items:flex-end; justify-content: space-between;">
+                    <div>
+                      <label for="search">search</label>
+                      <input type="text" id="search" name="search">
+                    </div>
+                    <div style="display: flex; flex-direction: row; align-items:baseline; justify-content: space-between;">
+                      <h2 style="margin-top: 20px">Our Suggestion:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </h2>
+                      <button style="margin-left: 10px; margin-right: 10px;" type="button">Rodents</button>
+                      <button style="margin-left: 10px; margin-right: 10px;" type="button">Sewer</button>
+                      <button style="margin-left: 10px; margin-right: 10px;" type="button">mice</button>
+                      
+                    </div>
+                    
+                  </div>
+                  
+                  
+                  <div style="grid-area:b; width:100px;">
+                    
+                  </div>
+                  <div style="grid-area:c; width:100px">
+                    
+                  </div>
+                  <div style="grid-area:d; width:100px">
+                    
+                  </div>
+  
+  
+  
+                  
+          
+                    
+                    <div style="grid-area:k; display: flex; flex-direction: column; align-items: center; justify-content: center;
+                    grid-gap: 10px;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-rows: 0.1fr 2fr;
+                    grid-template-areas: 
+                            'f f f  '
+                            'g g g  '
+                            'h h h  '; border: 5px solid #333; height:750px; padding:10px; width: 1450px;">
+<div style="grid-area:f; text-align: center;">
+  <h1>There Are No Results That Match Your Request!</h1>
+</div>
+<div style=" grid-area:g;">
+  <div style="background-color: black; width: 800px; height: 2px;"></div>>
+</div>
+<div style=" grid-area:h;">
+  <h1>Please Broaden Your Search Or Use Our Suggestion</h1>
+</div>
+                    </div>
+          </div>
+        </div>
+      </div>
+      <hr style="width:800px;">
+

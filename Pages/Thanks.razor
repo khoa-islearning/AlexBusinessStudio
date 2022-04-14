@@ -1,0 +1,92 @@
+@page "/thanks"
+@layout AdminLayout
+@using Radzen
+
+
+    <section>
+      <div style="background-color: #333; overflow: hidden; padding: 3px; width:67%;">
+        <!--- all links for nav bar-->
+        <a href="/landing" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;" >Home</a>
+    <a href="/cart" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Cart</a>
+    <a href="/Gallery" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Gallery</a>
+    <a style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Contact Me</a>
+      </div>
+      </section>
+
+    <hr style="width:67%;">
+    <h1 style="text-align:center; width:1400px">
+      THANK YOU
+    </h1>
+    <hr style="width:67%;">
+
+    <div style="width:100%";>
+      <div style="width:80%">
+        <div style="display: grid;
+        grid-gap: 10px;
+        grid-template-columns: 1fr 1fr 0.01fr 1fr;
+        grid-template-rows: 0.1fr 0.1fr 1fr 1fr;
+        grid-template-areas: 
+                'a b z d '
+                'e e z k '
+                'f g z i'
+                'o o z i'; ">
+                <div style="grid-area:a;">
+                  <img src="majestic.png" asp-append-version="true" width="300px" />
+                </div>
+                <div style="grid-area:b; border: 5px solid #333; display: flex; flex-direction: column; align-items: center; justify-items: center;">
+                  <br>
+                  <br>
+                  <br>
+                  <p>Click the download button below to download your picture</p><br>
+                  <button>Download</button>
+                  
+                </div>
+                <div style="grid-area:c; width:100px">
+                  
+                </div>
+                <div style="grid-area:d; width:300px; border: 5px solid #333; padding-left: 10px;">
+                  <p>Thank you for your purchase </p><br>
+                  <p>A copy of your receipt and the download links have been sent to your email</p><br>
+                  <p>New here?<br> Create and account to manage your purchases!</p>
+                </div>
+
+                <div style="grid-area:e; height:2px; width: 100%; background-color: black;">
+                </div>
+                <div style="grid-area:k; height:2px; width: 70%; background-color: black;">
+                </div>
+                <div style="grid-area:o; height:2px; width: 100%; background-color: black;">
+                </div>
+                <div style="grid-area:z; height: 68%; width: 2px; background-color: black;">
+                </div>
+
+                  <div style="grid-area:f;">
+                    <img src="majestic3.png" asp-append-version="true" width="300px" />
+                  </div>
+
+                  <div style="grid-area:g; border: 5px solid #333; display: flex; flex-direction: column; align-items: center; justify-items: center;">
+                    <br>
+                    <br>
+                    <br>
+                    <p>Click the download button below to download your picture</p><br>
+                    <button>Download</button>
+                    
+                  </div>
+                  
+                  <div style=" grid-area:i; display: flex; flex-direction: column; justify-content: left; align-items: flex-start; padding-left: 20px;">
+                    <h2 style="text-align:center">Questions?</h2>
+                    <br>
+                    <p style="text-align:center">Email</p>
+                    <textarea> </textarea>
+                    <br>
+                    <br>
+                    <p style="text-align:center">Inquiry</p>
+                    <textarea> </textarea>
+                    <br>
+                    <br>
+                    <button style="height: 100px; width: 300px;">Send</button>
+                  </div>
+
+        </div>
+      </div>
+    </div>
+    <hr style="width:1450px;">

@@ -1,0 +1,141 @@
+@page "/filterfour"
+@layout AdminLayout
+@using Radzen
+
+<div style="width: 100vw; height: 100vh;">
+<section>
+  <div style="background-color: #333; overflow: hidden; padding: 3px; width:80%;">
+    <!--- all links for nav bar-->
+    <a href="/landing" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;" >Home</a>
+    <a href="/cart" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Cart</a>
+    <a href="/Gallery" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Gallery</a>
+    <a href="/Contact Me" style="font-size: 24px;  display: flex; color: white; text-align: center; float:left; padding-left: 20px;padding-right: 20px; padding-top: 5px; padding-bottom: 5px;">Contact Me</a>
+  </div>
+  </section>
+<section>
+  <hr style="width:80%;">
+  <div style="width:1600px; height: 400px;   background-image: url('trees.png');   background-size: cover;   display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <h1 style="font-size: 500%; color: green;"> Welcome to My Gallery</h1>
+  </div>
+  <hr style="width:80%;">
+</section>
+
+  <section>
+    <div style="width:75%; display: flex; flex-direction: row; align-items:flex-end; justify-content: space-between;">
+      <div>
+        <label for="search">search</label>
+        <input type="text" id="search" name="search">
+      </div>
+      <div style="display: flex; flex-direction: row; align-items:baseline; justify-content: space-between;">
+        <h2 style="margin-top: 20px">Trending searches:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </h2>
+        <button style="margin-left: 10px; margin-right: 10px;" type="button">Cats</button>
+        <button style="margin-left: 10px; margin-right: 10px;" type="button">Dogs</button>
+        <button style="margin-left: 10px; margin-right: 10px;" type="button">Capybaras</button>
+
+
+      </div>
+      <div>
+        <a href="/filterzero"> filter </a>
+      </div>
+    </div>
+
+    <hr style="width:80%;">
+    <div style="width:80%; display: flex; flex-direction: row; gap:15px">
+<div style=" border: 5px solid #333; height: 750px; padding:10px; width:20%;">
+        <h1>Filter</h1>
+        <hr>
+        <h4>Cats</h4><br>
+        <input type="checkbox" id="filter1" name="filter1" value="Persian Cat">
+        <label for="filter1"> Persian Cat</label><br>
+        <input type="checkbox" id="filter2" name="filter2" value="Maine Coon">
+        <label for="filter2"> Maine Coon</label><br>
+        <input type="checkbox" id="filter3" name="filter3" value="Bengal Cat">
+        <label for="filter3"> Bengal Cat</label><br>
+        <input type="checkbox" id="filter4" name="filter4" value="Ragdoll">
+        <label for="filter4"> Ragdoll</label><br>
+
+        <hr>
+        <h4>Type</h4><br>
+        <input type="checkbox" id="filter1" name="filter1" value="Persian Cat">
+        <label for="filter1"> Colour</label><br>
+        <input type="checkbox" id="filter2" name="filter2" value="Maine Coon">
+        <label for="filter2"> Black & White</label><br>
+
+        <hr>
+        <h4>On sale</h4><br>
+        <input type="checkbox" id="filter1" name="filter1" value="Persian Cat">
+        <label for="filter1"> Colour</label><br>
+
+        <hr>
+        <h4>Orientation</h4><br>
+        <input type="checkbox" id="filter1" name="filter1" value="Persian Cat">
+        <label for="filter1"> Landscape</label><br>
+        <input type="checkbox" id="filter1" name="filter1" value="Persian Cat">
+        <label for="filter1"> Portrait</label><br>
+    </div>
+
+    <div style="width: 70%">
+      <div class="row">
+        <div class ="column">
+            <img src="dog1.png"  width="100%"/>
+            <img src="dog2.jpg"  width="100%" />
+            <img src="dog3.jpg"  width="100%" />
+            <img src="dog4.jpg" asp-append-version="true" width="100%"/>
+        </div>
+        <div class ="column">
+            <img src="dog5.jpg" asp-append-version="true" width="100%" />
+            <img src="dog6.jpg" asp-append-version="true" width="100%" />
+            <img src="dog7.jpg" asp-append-version="true" width="100%" />
+            <img src="dog8.jpg" asp-append-version="true" width="100%"/>
+        </div>
+        <div class ="column">
+            <img src="dog9.jpg" asp-append-version="true" width="100%"/>
+            <img src="dog10.jpg" asp-append-version="true" width="100%"/>
+            <img src="dog11.jpg" asp-append-version="true" width="100%"/>
+            <img src="dog12.jpg" asp-append-version="true" width="100%"/>
+        </div>
+        <div class ="column">
+            <img src="dog13.jpg" asp-append-version="true" width="100%"/>
+            <img src="dog14.jpg" asp-append-version="true" width="100%"/>
+            <img src="dog15.jpg" asp-append-version="true" width="100%"/>
+            <img src="dog16.jpg" asp-append-version="true" width="100%"/>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    
+
+
+  </section>
+  <hr style="width:80%;">
+</div>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+.column img {
+  margin-top: 12px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
